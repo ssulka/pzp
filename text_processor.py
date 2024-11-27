@@ -1,5 +1,4 @@
 def load_stop_words(filename):
-    """Load stop words from a file into a set."""
     try:
         with open(filename, 'r', encoding='utf-8') as file:
             return set(word.strip().lower() for word in file)
@@ -8,7 +7,6 @@ def load_stop_words(filename):
         return set()
 
 def process_text(filename, stop_words):
-    """Process text file word by word, excluding stop words."""
     try:
         with open(filename, 'r', encoding='utf-8') as file:
             for line in file:
@@ -18,11 +16,17 @@ def process_text(filename, stop_words):
                     # Clean the word: remove punctuation and convert to lowercase
                     word = word.strip('.,!?()[]{}":;').lower()
                     
+                    #filtering words grater than 8 and smaller than 4
+                    if len(word)>8:
+                        word=""
+                    if  len(word)<4:
+                        word=""
+
                     # Skip empty strings and stop words
                     if word and word not in stop_words:
-                        # Process the word (currently just printing, modify as needed)
                         print(f"Processing word: {word}")
-                        # You can add your specific word processing logic here
+
+                        
                         
     except FileNotFoundError:
         print(f"Error: {filename} not found.")
